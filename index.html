@@ -262,8 +262,18 @@
   .contact-info .row svg{ width:18px; height:18px; margin-top:3px; color: var(--rose); flex-shrink:0; }
   .contact-info .row .t{ font-weight:600; color: var(--cream); font-size:0.95rem; }
   .contact-info .row .s{ color: var(--taupe); font-size:0.88rem; margin-top:2px; }
-  .map-frame{ border-radius:6px; overflow:hidden; border:1px solid rgba(247,237,224,0.15); min-height:320px; filter: grayscale(0.4) contrast(1.1); }
-  .map-frame iframe{ width:100%; height:100%; min-height:320px; border:0; display:block; }
+  .map-frame{ position:relative; border-radius:6px; overflow:hidden; border:1px solid rgba(247,237,224,0.15); min-height:320px; }
+  .map-frame iframe{ width:100%; height:100%; min-height:320px; border:0; display:block; filter: grayscale(0.4) contrast(1.1); }
+  .map-reset{
+    position:absolute; top:12px; right:12px; z-index:2;
+    width:38px; height:38px; border-radius:50%;
+    background: rgba(23,18,15,0.85); border:1px solid rgba(247,237,224,0.25); color: var(--cream);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  .map-reset:hover{ background: var(--ink-dark); border-color: var(--cream); transform: translateY(-1px); }
+  .map-reset:active svg{ transform: rotate(180deg); }
+  .map-reset svg{ width:18px; height:18px; transition: transform .4s; }
 
   @media (max-width: 780px){ .contact-block{ grid-template-columns:1fr; } }
 
@@ -962,7 +972,10 @@
       </div>
     </div>
     <div class="map-frame reveal reveal-2">
-      <iframe src="https://www.google.com/maps?q=Carrer+de+Santa+Teresa+34,+43201+Reus&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa El Meu Secret"></iframe>
+      <button type="button" class="map-reset" id="map-reset" aria-label="Recentrar el mapa" title="Recentrar el mapa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+      </button>
+      <iframe id="map-iframe" src="https://www.google.com/maps?q=Carrer+de+Santa+Teresa+34,+43201+Reus&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa El Meu Secret"></iframe>
     </div>
   </div>
 </section>
@@ -1015,6 +1028,17 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- map recenter button ---------- */
+  (function(){
+    const btn = document.getElementById('map-reset');
+    const iframe = document.getElementById('map-iframe');
+    if (!btn || !iframe) return;
+    const baseSrc = iframe.getAttribute('src');
+    btn.addEventListener('click', () => {
+      iframe.src = baseSrc + '&_r=' + Date.now();
+    });
+  })();
 
   /* ---------- booking form: dates, time slots, phone mask, validation ---------- */
   (function(){
