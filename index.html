@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<!--
+  DEMO — plantilla de presentació per a El Meu Secret (Perruqueria, Reus).
+  Dades reals (adreça, telèfon, horari, preus, valoracions, ressenyes) recollides
+  de fonts públiques (Google, Booksy, Treatwell) el setembre de 2026.
+  Fotografies: banc d'imatges (Unsplash) com a mostra — a substituir per fotos
+  reals del local i l'equip abans de publicar la versió definitiva.
+-->
+<html lang="ca" data-lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Meu Secret — Perruqueria a Reus</title>
+<meta name="description" content="Perruqueria a Reus. Tall, color, tractaments, manicura i pentinats de núvia. Valorat amb 4,7★ a Google i 5,0★ a Booksy.">
+<meta property="og:title" content="El Meu Secret — Perruqueria a Reus">
+<meta property="og:description" content="Tall, color, tractaments i manicura al centre de Reus. Reserva en 2 minuts.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=1200&q=80&auto=format&fit=crop">
+<meta name="theme-color" content="#1a1512">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231a1512'/%3E%3Ccircle cx='50' cy='40' r='14' fill='none' stroke='%23cba463' stroke-width='4'/%3E%3Cpath d='M50 52 L50 72 M42 64 L58 64' stroke='%23cba463' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-dark: #17120f;
+    --ink: #1f1815;
+    --ink-light: #2c221c;
+    --cream: #f7ede0;
+    --taupe: #c9b8a4;
+    --rose: #c98a6f;
+    --rose-dim: #a06651;
+    --blush: #e7c3b6;
+    --gold: #cba463;
+    --max-w: 1160px;
+    --radius: 3px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background: var(--ink-dark);
+    color: var(--cream);
+    font-family: 'Archivo', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  img{ display:block; max-width:100%; }
+
+  .wrap{ max-width: var(--max-w); margin: 0 auto; padding: 0 28px; }
+
+  [data-lang="ca"] .i18n.es{ display:none; }
+  [data-lang="es"] .i18n.ca{ display:none; }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{ opacity:0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in{ opacity:1; transform:none; }
+  .reveal-1{ transition-delay: .08s; }
+  .reveal-2{ transition-delay: .16s; }
+  .reveal-3{ transition-delay: .24s; }
+  .reveal-4{ transition-delay: .32s; }
+  .reveal-5{ transition-delay: .4s; }
+
+  /* ---------- header ---------- */
+  header{
+    position: sticky; top:0; z-index: 30;
+    background: rgba(23,18,15,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(247,237,224,0.08);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 16px 28px;
+  }
+  .brand{ display:flex; flex-direction:column; }
+  .brand .name{ font-family:'Fraunces', serif; font-size:1.3rem; font-weight:600; letter-spacing:0.01em; }
+  .brand .kind{ font-size:0.7rem; color:var(--taupe); letter-spacing:0.12em; margin-top:2px; text-transform:uppercase; }
+
+  .nav-actions{ display:flex; align-items:center; gap:12px; }
+  .lang-toggle{
+    display:flex; border:1px solid rgba(247,237,224,0.25); border-radius: var(--radius);
+    overflow:hidden; font-size:0.78rem;
+  }
+  .lang-toggle button{
+    background:none; border:none; color:var(--taupe); font-family:'Archivo',sans-serif;
+    padding:6px 11px; cursor:pointer; font-size:0.78rem;
+  }
+  .lang-toggle button.active{ background: var(--rose); color: var(--ink-dark); font-weight:600; }
+
+  .icon-link{
+    width:36px; height:36px; display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(247,237,224,0.25); border-radius:50%; transition: border-color .2s, transform .2s;
+  }
+  .icon-link:hover{ border-color: var(--cream); transform: translateY(-2px); }
+  .icon-link svg{ width:16px; height:16px; }
+
+  .btn{
+    display:inline-block; padding: 11px 22px; border-radius: var(--radius);
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; border: 1px solid transparent;
+    background: transparent; font-family: 'Archivo', sans-serif;
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  .btn-primary{ background: var(--rose); color: var(--ink-dark); }
+  .btn-primary:hover{ background: var(--blush); transform: translateY(-1px); }
+  .btn-ghost{ border-color: rgba(247,237,224,0.35); color: var(--cream); }
+  .btn-ghost:hover{ border-color: var(--cream); transform: translateY(-1px); }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; min-height: 94vh; display:flex; align-items:center; overflow:hidden; }
+  .hero-bg{
+    position:absolute; inset:-4%; z-index:0;
+    background-image:
+      linear-gradient(180deg, rgba(23,18,15,.45) 0%, rgba(23,18,15,.55) 55%, rgba(23,18,15,.96) 100%),
+      linear-gradient(100deg, rgba(23,18,15,.94) 0%, rgba(23,18,15,.55) 45%, rgba(23,18,15,.25) 100%),
+      url('https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=1800&q=80&auto=format&fit=crop');
+    background-size: cover; background-position: center;
+    animation: kenburns 22s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{ 0%{ transform: scale(1); } 100%{ transform: scale(1.09); } }
+
+  .hero-content{ position:relative; z-index:1; padding: 90px 28px 70px; width:100%; }
+  .hero-grid{
+    max-width: var(--max-w); margin:0 auto;
+    display:grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items:center;
+  }
+  .kicker-line{ display:flex; align-items:center; gap:10px; color: var(--gold); font-size:0.85rem; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:18px; }
+  .kicker-line::before{ content:''; width:26px; height:1px; background: var(--gold); }
+  .hero h1{ font-size: clamp(2.4rem, 4.6vw, 3.7rem); max-width: 13ch; }
+  .hero .lede{ margin-top: 20px; max-width: 44ch; color: var(--taupe); font-size: 1.08rem; }
+  .hero .cta-row{ margin-top:32px; display:flex; gap:14px; flex-wrap:wrap; }
+
+  .fact-panel{
+    background: rgba(31,24,21,0.55);
+    border: 1px solid rgba(247,237,224,0.14);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    padding: 28px;
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .fact{ display:flex; align-items:center; gap:14px; }
+  .fact .stars{ font-family:'Fraunces', serif; font-style:italic; font-size:1.35rem; color: var(--gold); white-space:nowrap; }
+  .fact .label{ font-size:0.83rem; color: var(--taupe); }
+  .fact .label b{ color: var(--cream); font-weight:600; }
+  .fact-div{ height:1px; background: rgba(247,237,224,0.12); }
+
+  /* ---------- section shell ---------- */
+  section{ padding: 84px 28px; }
+  .section-head{ max-width: 54ch; margin-bottom: 46px; }
+  .section-head .kicker{ color: var(--rose); font-size:0.85rem; letter-spacing:0.08em; margin-bottom:10px; text-transform:uppercase; }
+  .section-head h2{ font-size: clamp(1.7rem, 3.2vw, 2.3rem); }
+  .section-head p{ color: var(--taupe); margin-top:14px; }
+
+  .on-panel{ background: var(--ink); }
+
+  /* ---------- services menu ---------- */
+  .menu{ max-width: var(--max-w); margin:0 auto; }
+  .menu-cat{ margin-bottom: 30px; }
+  .menu-cat:last-child{ margin-bottom:0; }
+  .menu-cat-title{ font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color: var(--gold); margin-bottom:6px; }
+  .menu-row{
+    display:flex; align-items:baseline; gap:14px;
+    padding: 18px 0; border-bottom: 1px solid rgba(247,237,224,0.1);
+  }
+  .menu-row .name{ font-family:'Fraunces', serif; font-size:1.12rem; white-space:nowrap; }
+  .menu-row .desc{ color: var(--taupe); font-size:0.9rem; }
+  .menu-row .leader{ flex:1; border-bottom: 1px dotted rgba(247,237,224,0.25); position:relative; top:-5px; }
+  .menu-row .price{ font-family:'Fraunces', serif; font-style:italic; color: var(--rose); white-space:nowrap; }
+  .menu-row-inner{ display:flex; flex-direction:column; }
+
+  @media (max-width: 640px){
+    .menu-row{ flex-wrap:wrap; }
+    .menu-row .leader{ display:none; }
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery{
+    max-width: var(--max-w); margin:0 auto;
+    display:grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 130px; gap: 14px;
+  }
+  .g-item{
+    position:relative; overflow:hidden; border-radius:6px;
+    grid-column: span 3; grid-row: span 2;
+  }
+  .g-item.tall{ grid-row: span 3; }
+  .g-item.wide{ grid-column: span 3; }
+  .g-item img{ width:100%; height:100%; object-fit:cover; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .g-item:hover img{ transform: scale(1.08); }
+  .g-cap{
+    position:absolute; left:0; right:0; bottom:0; padding: 16px;
+    background: linear-gradient(0deg, rgba(23,18,15,0.85), transparent 70%);
+    font-size:0.85rem; letter-spacing:0.03em; opacity:0; transform: translateY(8px);
+    transition: opacity .3s, transform .3s;
+  }
+  .g-item:hover .g-cap{ opacity:1; transform:none; }
+
+  @media (max-width: 780px){
+    .gallery{ grid-template-columns: repeat(2, 1fr); grid-auto-rows:150px; }
+    .g-item{ grid-column: span 1 !important; grid-row: span 2 !important; }
+  }
+
+  /* ---------- about ---------- */
+  .about{ max-width: var(--max-w); margin:0 auto; display:grid; grid-template-columns: 1fr 1fr; gap:60px; align-items:center; }
+  .about p{ font-size:1.05rem; color: var(--taupe); }
+  .about .frame{
+    position:relative; border-radius:6px; overflow:hidden; aspect-ratio: 4/3;
+    border: 1px solid rgba(247,237,224,0.15);
+  }
+  .about .frame img{ width:100%; height:100%; object-fit:cover; }
+  .about .frame::after{
+    content:''; position:absolute; inset:0;
+    box-shadow: inset 0 0 0 1px rgba(203,164,99,0.25);
+  }
+
+  /* ---------- instagram proof ---------- */
+  .proof{
+    max-width: var(--max-w); margin: 0 auto;
+    display:grid; grid-template-columns: 1fr 1fr; gap:48px; align-items:center;
+  }
+  .proof .quote{ font-family:'Fraunces', serif; font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-style:italic; max-width: 30ch; }
+  .proof .side{ display:flex; flex-direction:column; gap:18px; align-items:flex-start; margin-top:24px; }
+  .ig-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; }
+  .ig-grid a{ position:relative; display:block; aspect-ratio:1; overflow:hidden; border-radius:4px; }
+  .ig-grid img{ width:100%; height:100%; object-fit:cover; transition: transform .4s, filter .4s; }
+  .ig-grid a::after{
+    content:'♡'; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem; color:#fff; background: rgba(23,18,15,0); opacity:0; transition: opacity .3s, background .3s;
+  }
+  .ig-grid a:hover::after{ opacity:1; background: rgba(23,18,15,0.45); }
+  .ig-grid a:hover img{ transform: scale(1.06); }
+
+  @media (max-width: 780px){ .proof{ grid-template-columns:1fr; } }
+
+  /* ---------- testimonials ---------- */
+  .testimonials{ max-width: var(--max-w); margin:0 auto; display:grid; grid-template-columns: repeat(3, 1fr); gap:36px; }
+  blockquote{ border-left: 2px solid var(--rose-dim); padding-left:22px; }
+  blockquote p{ font-family:'Fraunces', serif; font-style:italic; font-size:1.08rem; }
+  blockquote cite{ display:block; margin-top:14px; color: var(--taupe); font-style:normal; font-size:0.85rem; }
+  blockquote cite b{ color: var(--cream); font-weight:600; }
+
+  @media (max-width: 780px){
+    .hero-grid, .about, .testimonials{ grid-template-columns: 1fr; }
+    .fact-panel{ flex-direction:row; flex-wrap:wrap; }
+  }
+
+  /* ---------- map / contact ---------- */
+  .contact-block{
+    max-width: var(--max-w); margin:0 auto;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items:stretch;
+  }
+  .contact-info{ display:flex; flex-direction:column; gap:22px; justify-content:center; }
+  .contact-info .row{ display:flex; gap:14px; align-items:flex-start; }
+  .contact-info .row svg{ width:18px; height:18px; margin-top:3px; color: var(--rose); flex-shrink:0; }
+  .contact-info .row .t{ font-weight:600; color: var(--cream); font-size:0.95rem; }
+  .contact-info .row .s{ color: var(--taupe); font-size:0.88rem; margin-top:2px; }
+  .map-frame{ border-radius:6px; overflow:hidden; border:1px solid rgba(247,237,224,0.15); min-height:320px; filter: grayscale(0.4) contrast(1.1); }
+  .map-frame iframe{ width:100%; height:100%; min-height:320px; border:0; display:block; }
+
+  @media (max-width: 780px){ .contact-block{ grid-template-columns:1fr; } }
+
+  /* ---------- footer ---------- */
+  footer{ background: var(--ink-dark); border-top: 1px solid rgba(247,237,224,0.1); padding: 50px 28px 30px; }
+  .footer-grid{ max-width: var(--max-w); margin:0 auto; display:grid; grid-template-columns: 1.3fr 1fr 1fr; gap:40px; }
+  .footer-grid h3{ font-size:1rem; margin-bottom:14px; }
+  .footer-grid p, .footer-grid a{ color: var(--taupe); font-size:0.92rem; }
+  .footer-grid a:hover{ color: var(--cream); }
+  .footer-grid .hours-row{ display:flex; justify-content:space-between; max-width:220px; padding:4px 0; }
+  .foot-note{
+    max-width: var(--max-w); margin: 40px auto 0; padding-top:20px;
+    border-top:1px solid rgba(247,237,224,0.08);
+    font-size:0.78rem; color: rgba(201,184,164,0.6);
+  }
+
+  @media (max-width: 640px){ .footer-grid{ grid-template-columns: 1fr; } }
+
+  @media (max-width: 480px){
+    .nav{ flex-wrap:wrap; gap:12px; padding:14px 20px; }
+    .brand{ order:1; }
+    .nav-actions{ order:2; margin-left:auto; }
+    .btn{ padding:9px 16px; white-space:nowrap; }
+  }
+
+  /* ---------- menu footnote ---------- */
+  .menu-more{ margin-top:36px; padding-top:24px; border-top:1px solid rgba(247,237,224,0.1); color:var(--taupe); font-size:0.9rem; }
+  .menu-more a{ color:var(--rose); font-weight:600; }
+  .menu-more a:hover{ color:var(--blush); }
+
+  /* ---------- team ---------- */
+  .team{ max-width: var(--max-w); margin:0 auto; display:grid; grid-template-columns: repeat(4, 1fr); gap:28px; }
+  .team-card{ text-align:center; }
+  .avatar{
+    width:84px; height:84px; margin:0 auto 16px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(150deg, var(--rose) 0%, var(--gold) 100%);
+    color: var(--ink-dark); font-family:'Fraunces', serif; font-weight:600; font-size:1.5rem;
+  }
+  .team-card .t-name{ font-family:'Fraunces', serif; font-size:1.1rem; }
+  .team-card .t-role{ color:var(--taupe); font-size:0.82rem; margin-top:4px; }
+
+  @media (max-width: 780px){ .team{ grid-template-columns: repeat(2, 1fr); row-gap:36px; } }
+
+  /* ---------- booking form ---------- */
+  .booking{ max-width: var(--max-w); margin:0 auto; }
+  .b-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:22px 28px; }
+  .field{ display:flex; flex-direction:column; gap:7px; }
+  .field-wide{ grid-column: 1 / -1; }
+  .field label{ font-size:0.82rem; color: var(--taupe); letter-spacing:0.02em; }
+  .field label .req{ color: var(--rose); }
+  .field input, .field select, .field textarea{
+    background: rgba(23,18,15,0.5); border:1px solid rgba(247,237,224,0.22); border-radius:var(--radius);
+    color: var(--cream); font-family:'Archivo', sans-serif; font-size:0.95rem; padding:12px 14px;
+    outline:none; transition: border-color .2s, box-shadow .2s; width:100%;
+  }
+  .field select{ appearance:none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9b8a4' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position: right 12px center; background-size:16px; padding-right:38px; }
+  .field select:disabled{ opacity:0.5; cursor:not-allowed; }
+  .field textarea{ resize:vertical; min-height:90px; font-family:'Archivo', sans-serif; }
+  .field input::placeholder, .field textarea::placeholder{ color: rgba(201,184,164,0.5); }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color: var(--rose); box-shadow: 0 0 0 3px rgba(201,138,111,0.18);
+  }
+  .field.has-error input, .field.has-error select, .field.has-error textarea{
+    border-color: #d9776a; box-shadow: 0 0 0 3px rgba(217,119,106,0.15);
+  }
+  .field-err{ font-size:0.78rem; color:#e0897c; min-height:1em; display:block; }
+  .b-submit-row{ margin-top:32px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .b-note{ font-size:0.8rem; color: var(--taupe); max-width:34ch; }
+  .b-note.i18n{ display:inline; }
+
+  .b-result{
+    max-width: var(--max-w); margin: 0 auto; margin-top:40px; padding:30px 32px;
+    background: rgba(147,164,130,0.08); border:1px solid rgba(203,164,99,0.35); border-radius:8px;
+  }
+  .b-result h3{ font-family:'Fraunces', serif; font-size:1.3rem; color: var(--cream); display:flex; align-items:center; gap:10px; }
+  .b-result h3 .ok{
+    width:26px; height:26px; border-radius:50%; background: var(--rose); color:var(--ink-dark);
+    display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0;
+  }
+  .b-summary{ margin-top:18px; display:grid; grid-template-columns: auto 1fr; gap:8px 16px; font-size:0.92rem; }
+  .b-summary dt{ color: var(--taupe); }
+  .b-summary dd{ color: var(--cream); font-weight:500; }
+  .b-result .b-demo-note{ margin-top:20px; padding-top:18px; border-top:1px solid rgba(247,237,224,0.12); font-size:0.85rem; color: var(--taupe); }
+  .b-result .b-demo-note a{ color: var(--rose); font-weight:600; }
+
+  @media (max-width: 640px){ .b-grid{ grid-template-columns: 1fr; } .b-summary{ grid-template-columns: 1fr; } .b-summary dt{ margin-top:8px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <span class="name">El Meu Secret</span>
+      <span class="kind i18n ca">perruqueria · Reus</span>
+      <span class="kind i18n es">peluquería · Reus</span>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button id="btn-ca" class="active" onclick="setLang('ca')">CA</button>
+        <button id="btn-es" onclick="setLang('es')">ES</button>
+      </div>
+      <a class="icon-link" href="https://www.facebook.com/elmeusecret/?locale=ca_ES" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 3h-2.5A4.5 4.5 0 0 0 8 7.5V10H5.5v3.5H8V21h3.5v-7.5h3l.5-3.5h-3.5V7.5c0-.83.67-1.5 1.5-1.5H15V3z"/></svg>
+      </a>
+      <a class="icon-link" href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1"/></svg>
+      </a>
+      <a class="btn btn-primary" href="#reserva">
+        <span class="i18n ca">Demana cita</span>
+        <span class="i18n es">Pide cita</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-grid">
+      <div>
+        <div class="kicker-line i18n ca">Perruqueria a Reus</div>
+        <div class="kicker-line i18n es">Peluquería en Reus</div>
+        <h1>
+          <span class="i18n ca">Un secret que tot Reus coneix.</span>
+          <span class="i18n es">Un secreto que toda Reus conoce.</span>
+        </h1>
+        <p class="lede">
+          <span class="i18n ca">Perruqueria de confiança al centre de la ciutat. Tall, color, tractaments, manicura i pentinats de núvia, fets amb temps i ofici.</span>
+          <span class="i18n es">Peluquería de confianza en el centro de la ciudad. Corte, color, tratamientos, manicura y recogidos de novia, hechos con tiempo y oficio.</span>
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#reserva">
+            <span class="i18n ca">Demana cita</span>
+            <span class="i18n es">Pide cita</span>
+          </a>
+          <a class="btn btn-ghost" href="#serveis">
+            <span class="i18n ca">Veure serveis</span>
+            <span class="i18n es">Ver servicios</span>
+          </a>
+        </div>
+      </div>
+      <div class="fact-panel">
+        <div class="fact">
+          <span class="stars">4,7★</span>
+          <span class="label"><b>Google</b> · <span class="i18n ca">57 ressenyes</span><span class="i18n es">57 reseñas</span></span>
+        </div>
+        <div class="fact-div"></div>
+        <div class="fact">
+          <span class="stars">5,0★</span>
+          <span class="label"><b>Booksy</b> · <span class="i18n ca">27 ressenyes</span><span class="i18n es">27 reseñas</span></span>
+        </div>
+        <div class="fact-div"></div>
+        <div class="fact">
+          <span class="stars" style="font-size:1.05rem;">C/ Santa Teresa, 34</span>
+          <span class="label i18n ca">43201 Reus</span>
+          <span class="label i18n es">43201 Reus</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="serveis" class="on-panel">
+  <div class="section-head reveal">
+    <div class="kicker i18n ca">Serveis</div>
+    <div class="kicker i18n es">Servicios</div>
+    <h2>
+      <span class="i18n ca">El que fem, i com ho fem</span>
+      <span class="i18n es">Lo que hacemos, y cómo lo hacemos</span>
+    </h2>
+    <p>
+      <span class="i18n ca">Preus orientatius. El pressupost final depèn de la llargada i l'estat del cabell.</span>
+      <span class="i18n es">Precios orientativos. El presupuesto final depende del largo y el estado del cabello.</span>
+    </p>
+  </div>
+  <div class="menu">
+
+    <div class="menu-cat reveal reveal-1">
+      <div class="menu-cat-title i18n ca">Cabell</div>
+      <div class="menu-cat-title i18n es">Cabello</div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Tall home</span>
+          <span class="name i18n es">Corte hombre</span>
+          <span class="desc i18n ca">Tall i acabat, 35 min</span>
+          <span class="desc i18n es">Corte y acabado, 35 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">des de 26€</span>
+        <span class="price i18n es">desde 26€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Tall sense assecar</span>
+          <span class="name i18n es">Corte sin secado</span>
+          <span class="desc i18n ca">Per a qui ja sap com el vol pentinar a casa</span>
+          <span class="desc i18n es">Para quien ya sabe cómo peinarlo en casa</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">des de 35€</span>
+        <span class="price i18n es">desde 35€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Tall i pentinat</span>
+          <span class="name i18n es">Corte y peinado</span>
+          <span class="desc i18n ca">Segons llargada, curt a extra llarg</span>
+          <span class="desc i18n es">Según largo, corto a extra largo</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">des de 54€</span>
+        <span class="price i18n es">desde 54€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Serrell</span>
+          <span class="name i18n es">Flequillo</span>
+          <span class="desc i18n ca">Repàs ràpid, 15 min</span>
+          <span class="desc i18n es">Repaso rápido, 15 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">15€</span>
+        <span class="price i18n es">15€</span>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal reveal-2">
+      <div class="menu-cat-title i18n ca">Color</div>
+      <div class="menu-cat-title i18n es">Color</div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Mèixes balayage</span>
+          <span class="name i18n es">Balayage</span>
+          <span class="desc i18n ca">Amb pentinat inclòs, segons llargada</span>
+          <span class="desc i18n es">Con peinado incluido, según largo</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">des de 91€</span>
+        <span class="price i18n es">desde 91€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Canvi de color</span>
+          <span class="name i18n es">Cambio de color</span>
+          <span class="desc i18n ca">1h 45 min</span>
+          <span class="desc i18n es">1h 45 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">48€</span>
+        <span class="price i18n es">48€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Matisat</span>
+          <span class="name i18n es">Matización</span>
+          <span class="desc i18n ca">30 min</span>
+          <span class="desc i18n es">30 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">25€</span>
+        <span class="price i18n es">25€</span>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal reveal-3">
+      <div class="menu-cat-title i18n ca">Tractaments</div>
+      <div class="menu-cat-title i18n es">Tratamientos</div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Allisat de queratina</span>
+          <span class="name i18n es">Alisado de keratina</span>
+          <span class="desc i18n ca">Tractament de llarga durada, 3h</span>
+          <span class="desc i18n es">Tratamiento de larga duración, 3h</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">270€</span>
+        <span class="price i18n es">270€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Tractament reconstructor</span>
+          <span class="name i18n es">Tratamiento reconstructor</span>
+          <span class="desc i18n ca">15 min</span>
+          <span class="desc i18n es">15 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">26€</span>
+        <span class="price i18n es">26€</span>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal reveal-4">
+      <div class="menu-cat-title i18n ca">Manicura</div>
+      <div class="menu-cat-title i18n es">Manicura</div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Semipermanent</span>
+          <span class="name i18n es">Semipermanente</span>
+          <span class="desc i18n ca">1h 30 min</span>
+          <span class="desc i18n es">1h 30 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">29€</span>
+        <span class="price i18n es">29€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Manicura sense esmalt</span>
+          <span class="name i18n es">Manicura sin esmalte</span>
+          <span class="desc i18n ca">45 min</span>
+          <span class="desc i18n es">45 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">13,50€</span>
+        <span class="price i18n es">13,50€</span>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal reveal-5">
+      <div class="menu-cat-title i18n ca">Pentinats i núvies</div>
+      <div class="menu-cat-title i18n es">Peinados y novias</div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Mig recollit</span>
+          <span class="name i18n es">Medio recogido</span>
+          <span class="desc i18n ca">45 min</span>
+          <span class="desc i18n es">45 min</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">52€</span>
+        <span class="price i18n es">52€</span>
+      </div>
+
+      <div class="menu-row">
+        <div class="menu-row-inner">
+          <span class="name i18n ca">Recollit de núvia</span>
+          <span class="name i18n es">Recogido de novia</span>
+          <span class="desc i18n ca">1h, prova prèvia recomanada</span>
+          <span class="desc i18n es">1h, prueba previa recomendada</span>
+        </div>
+        <div class="leader"></div>
+        <span class="price i18n ca">90€</span>
+        <span class="price i18n es">90€</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="menu-more reveal">
+    <span class="i18n ca">Aquest és un tast del menú — hi ha més de 50 serveis disponibles (mèixes, pòlids, allisats i tractaments específics). <a href="https://booksy.com/es-es/114261_el-meu-secret_peluqueria_52289_reus" target="_blank" rel="noopener">Menú complet i preus exactes a Booksy →</a></span>
+    <span class="i18n es">Esto es una muestra del menú — hay más de 50 servicios disponibles (mechas, pulidos, alisados y tratamientos específicos). <a href="https://booksy.com/es-es/114261_el-meu-secret_peluqueria_52289_reus" target="_blank" rel="noopener">Menú completo y precios exactos en Booksy →</a></span>
+  </div>
+</section>
+
+<section id="reserva">
+  <div class="section-head reveal">
+    <div class="kicker i18n ca">Sol·licitud de cita</div>
+    <div class="kicker i18n es">Solicitud de cita</div>
+    <h2>
+      <span class="i18n ca">Deixa'ns la teva sol·licitud</span>
+      <span class="i18n es">Déjanos tu solicitud</span>
+    </h2>
+    <p>
+      <span class="i18n ca">Aquest formulari envia una sol·licitud, no bloqueja hora a l'agenda a l'instant — l'equip et truca o escriu per confirmar disponibilitat real. (A Booksy sí que és en temps real: cada professional té el seu calendari i, en reservar, l'hora desapareix per a la resta de clients.) Formulari de demostració: aquí no s'envia cap dada enlloc.</span>
+      <span class="i18n es">Este formulario envía una solicitud, no bloquea hora en la agenda al instante — el equipo te llama o escribe para confirmar disponibilidad real. (En Booksy sí es en tiempo real: cada profesional tiene su calendario y, al reservar, la hora desaparece para el resto de clientes.) Formulario de demostración: aquí no se envía ningún dato a ninguna parte.</span>
+    </p>
+  </div>
+
+  <form class="booking reveal" id="booking-form" novalidate>
+    <div class="b-grid">
+      <div class="field" id="field-service">
+        <label for="f-service"><span class="i18n ca">Servei</span><span class="i18n es">Servicio</span> <span class="req">*</span></label>
+        <select id="f-service" name="service" required>
+          <option value="" data-i18n-ca="Selecciona un servei" data-i18n-es="Selecciona un servicio">Selecciona un servei</option>
+          <optgroup label="Cabell / Cabello">
+            <option>Tall home — 26€</option>
+            <option>Tall sense assecar — 35€</option>
+            <option>Tall i pentinat — des de 54€</option>
+          </optgroup>
+          <optgroup label="Color">
+            <option>Mèixes balayage — des de 91€</option>
+            <option>Canvi de color — 48€</option>
+            <option>Matisat — 25€</option>
+          </optgroup>
+          <optgroup label="Tractaments / Tratamientos">
+            <option>Allisat de queratina — 270€</option>
+            <option>Tractament reconstructor — 26€</option>
+          </optgroup>
+          <optgroup label="Manicura">
+            <option>Manicura semipermanent — 29€</option>
+          </optgroup>
+          <optgroup label="Pentinats i núvies / Peinados y novias">
+            <option>Mig recollit — 52€</option>
+            <option>Recollit de núvia — 90€</option>
+          </optgroup>
+        </select>
+        <span class="field-err" data-err="service"></span>
+      </div>
+
+      <div class="field" id="field-staff">
+        <label for="f-staff"><span class="i18n ca">Professional</span><span class="i18n es">Profesional</span></label>
+        <select id="f-staff" name="staff">
+          <option value="" data-i18n-ca="Sense preferència" data-i18n-es="Sin preferencia">Sense preferència</option>
+          <option>Raül Arroyo</option>
+          <option>Daniel Castejón</option>
+          <option>Nadia Cacholatti</option>
+          <option>Haizea Indart</option>
+        </select>
+      </div>
+
+      <div class="field" id="field-date">
+        <label for="f-date"><span class="i18n ca">Data preferida</span><span class="i18n es">Fecha preferida</span> <span class="req">*</span></label>
+        <input type="date" id="f-date" name="date" required>
+        <span class="field-err" data-err="date"></span>
+      </div>
+
+      <div class="field" id="field-time">
+        <label for="f-time"><span class="i18n ca">Hora preferida</span><span class="i18n es">Hora preferida</span> <span class="req">*</span></label>
+        <select id="f-time" name="time" required disabled>
+          <option value="" data-i18n-ca="Tria primer una data" data-i18n-es="Elige primero una fecha">Tria primer una data</option>
+        </select>
+        <span class="field-err" data-err="time"></span>
+      </div>
+
+      <div class="field" id="field-name">
+        <label for="f-name"><span class="i18n ca">Nom i cognoms</span><span class="i18n es">Nombre y apellidos</span> <span class="req">*</span></label>
+        <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="Maria García">
+        <span class="field-err" data-err="name"></span>
+      </div>
+
+      <div class="field" id="field-phone">
+        <label for="f-phone"><span class="i18n ca">Telèfon</span><span class="i18n es">Teléfono</span> <span class="req">*</span></label>
+        <input type="tel" id="f-phone" name="phone" required autocomplete="tel" inputmode="numeric" placeholder="600 12 34 56" maxlength="11">
+        <span class="field-err" data-err="phone"></span>
+      </div>
+
+      <div class="field" id="field-email">
+        <label for="f-email">Email</label>
+        <input type="email" id="f-email" name="email" autocomplete="email" placeholder="tu@email.com">
+        <span class="field-err" data-err="email"></span>
+      </div>
+
+      <div class="field field-wide" id="field-notes">
+        <label for="f-notes"><span class="i18n ca">Comentaris</span><span class="i18n es">Comentarios</span></label>
+        <textarea id="f-notes" name="notes" rows="3" data-i18n-ca-ph="Alguna cosa que hàgim de saber?" data-i18n-es-ph="¿Algo que debamos saber?" placeholder="Alguna cosa que hàgim de saber?"></textarea>
+      </div>
+    </div>
+
+    <div class="b-submit-row">
+      <button type="submit" class="btn btn-primary">
+        <span class="i18n ca">Enviar sol·licitud</span>
+        <span class="i18n es">Enviar solicitud</span>
+      </button>
+      <span class="b-note">
+        <span class="i18n ca">*Formulari de demostració — no s'envia cap dada enlloc. Res queda reservat de debò.</span>
+        <span class="i18n es">*Formulario de demostración — no se envía ningún dato a ninguna parte. Nada queda reservado de verdad.</span>
+      </span>
+    </div>
+  </form>
+
+  <div class="b-result" id="booking-result" hidden tabindex="-1">
+    <h3><span class="ok">✓</span>
+      <span class="i18n ca">Sol·licitud rebuda (simulació)</span>
+      <span class="i18n es">Solicitud recibida (simulación)</span>
+    </h3>
+    <dl class="b-summary" id="booking-summary"></dl>
+    <div class="b-demo-note">
+      <span class="i18n ca">Això és una demo: cap dada s'ha desat ni enviat, i l'hora <b>no</b> queda reservada. En el lloc final, això enviaria la sol·licitud per WhatsApp o email al saló, que trucaria per confirmar l'hora exacta — o bé es connectaria directament amb el calendari en temps real de <a href="https://booksy.com/es-es/114261_el-meu-secret_peluqueria_52289_reus" target="_blank" rel="noopener">Booksy</a>.</span>
+      <span class="i18n es">Esto es una demo: ningún dato se ha guardado ni enviado, y la hora <b>no</b> queda reservada. En el sitio final, esto enviaría la solicitud por WhatsApp o email al salón, que llamaría para confirmar la hora exacta — o se conectaría directamente con el calendario en tiempo real de <a href="https://booksy.com/es-es/114261_el-meu-secret_peluqueria_52289_reus" target="_blank" rel="noopener">Booksy</a>.</span>
+    </div>
+    <div style="margin-top:20px;">
+      <button type="button" class="btn btn-ghost" id="booking-reset">
+        <span class="i18n ca">Fer una altra prova</span>
+        <span class="i18n es">Hacer otra prueba</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="treball">
+  <div class="section-head reveal">
+    <div class="kicker i18n ca">Ambient</div>
+    <div class="kicker i18n es">Ambiente</div>
+    <h2>
+      <span class="i18n ca">El local i la feina del dia a dia</span>
+      <span class="i18n es">El local y el trabajo del día a día</span>
+    </h2>
+  </div>
+  <div class="gallery">
+    <div class="g-item wide tall reveal reveal-1">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900&q=75&auto=format&fit=crop" alt="L'espai de la perruqueria">
+      <div class="g-cap i18n ca">L'espai</div>
+      <div class="g-cap i18n es">El espacio</div>
+    </div>
+    <div class="g-item reveal reveal-2">
+      <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=700&q=75&auto=format&fit=crop" alt="Ritual de rentat de cabell">
+      <div class="g-cap i18n ca">Ritual de rentat</div>
+      <div class="g-cap i18n es">Ritual de lavado</div>
+    </div>
+    <div class="g-item reveal reveal-3">
+      <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=700&q=75&auto=format&fit=crop" alt="Acabat i pentinat">
+      <div class="g-cap i18n ca">Acabat perfecte</div>
+      <div class="g-cap i18n es">Acabado perfecto</div>
+    </div>
+    <div class="g-item reveal reveal-4">
+      <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=700&q=75&auto=format&fit=crop" alt="Retrat editorial">
+      <div class="g-cap i18n ca">Editorial</div>
+      <div class="g-cap i18n es">Editorial</div>
+    </div>
+    <div class="g-item wide reveal reveal-5">
+      <img src="https://images.unsplash.com/photo-1470259078422-826894b933aa?w=900&q=75&auto=format&fit=crop" alt="Color amb caràcter">
+      <div class="g-cap i18n ca">Color amb caràcter</div>
+      <div class="g-cap i18n es">Color con carácter</div>
+    </div>
+    <div class="g-item reveal reveal-1">
+      <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=700&q=75&auto=format&fit=crop" alt="Manicura semipermanent">
+      <div class="g-cap i18n ca">Manicura</div>
+      <div class="g-cap i18n es">Manicura</div>
+    </div>
+  </div>
+</section>
+
+<section class="on-panel">
+  <div class="about">
+    <div class="reveal reveal-1">
+      <div class="section-head" style="margin-bottom:20px;">
+        <div class="kicker i18n ca">L'ofici</div>
+        <div class="kicker i18n es">El oficio</div>
+        <h2>
+          <span class="i18n ca">No seguim tendències per seguir-les</span>
+          <span class="i18n es">No seguimos tendencias por seguirlas</span>
+        </h2>
+      </div>
+      <p>
+        <span class="i18n ca">Escoltem què necessita el teu cabell i el teu dia a dia, i ho treballem amb temps, tècnica i mans expertes. Cap pressa, cap fórmula genèrica — cada persona surt d'aquí amb el seu look, no amb el d'una foto.</span>
+        <span class="i18n es">Escuchamos lo que necesita tu cabello y tu día a día, y lo trabajamos con tiempo, técnica y manos expertas. Sin prisa, sin fórmulas genéricas — cada persona sale de aquí con su look, no con el de una foto.</span>
+      </p>
+    </div>
+    <div class="frame reveal reveal-2">
+      <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&q=78&auto=format&fit=crop" alt="Estilista treballant amb una clienta">
+    </div>
+  </div>
+</section>
+
+<section id="equip">
+  <div class="section-head reveal">
+    <div class="kicker i18n ca">Equip</div>
+    <div class="kicker i18n es">Equipo</div>
+    <h2>
+      <span class="i18n ca">Qui et rebrà</span>
+      <span class="i18n es">Quién te recibirá</span>
+    </h2>
+  </div>
+  <div class="team">
+    <div class="team-card reveal reveal-1">
+      <div class="avatar">RA</div>
+      <div class="t-name">Raül Arroyo</div>
+      <div class="t-role i18n ca">Fundador · Estilista</div>
+      <div class="t-role i18n es">Fundador · Estilista</div>
+    </div>
+    <div class="team-card reveal reveal-2">
+      <div class="avatar">DC</div>
+      <div class="t-name">Daniel Castejón</div>
+      <div class="t-role i18n ca">Estilista</div>
+      <div class="t-role i18n es">Estilista</div>
+    </div>
+    <div class="team-card reveal reveal-3">
+      <div class="avatar">NC</div>
+      <div class="t-name">Nadia Cacholatti</div>
+      <div class="t-role i18n ca">Estilista</div>
+      <div class="t-role i18n es">Estilista</div>
+    </div>
+    <div class="team-card reveal reveal-4">
+      <div class="avatar">HI</div>
+      <div class="t-name">Haizea Indart</div>
+      <div class="t-role i18n ca">Estilista</div>
+      <div class="t-role i18n es">Estilista</div>
+    </div>
+  </div>
+</section>
+
+<section id="instagram">
+  <div class="proof">
+    <div class="reveal reveal-1">
+      <p class="quote">
+        <span class="i18n ca">"Grans professionals, bon tracte i sempre contenta."</span>
+        <span class="i18n es">"Grandes profesionales, buen trato y siempre contenta."</span>
+      </p>
+      <div class="side">
+        <span style="color:var(--taupe); font-size:0.85rem;" class="i18n ca">— ressenya real a Google</span>
+        <span style="color:var(--taupe); font-size:0.85rem;" class="i18n es">— reseña real en Google</span>
+        <a class="btn btn-ghost" href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener">
+          <span class="i18n ca">Segueix-nos · @elmeusecret</span>
+          <span class="i18n es">Síguenos · @elmeusecret</span>
+        </a>
+      </div>
+    </div>
+    <div class="ig-grid reveal reveal-2">
+      <a href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=400&q=70&auto=format&fit=crop" alt="Instagram El Meu Secret"></a>
+      <a href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1470259078422-826894b933aa?w=400&q=70&auto=format&fit=crop" alt="Instagram El Meu Secret"></a>
+      <a href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&q=70&auto=format&fit=crop" alt="Instagram El Meu Secret"></a>
+      <a href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=400&q=70&auto=format&fit=crop" alt="Instagram El Meu Secret"></a>
+      <a href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=400&q=70&auto=format&fit=crop" alt="Instagram El Meu Secret"></a>
+      <a href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&q=70&auto=format&fit=crop" alt="Instagram El Meu Secret"></a>
+    </div>
+  </div>
+</section>
+
+<section class="on-panel">
+  <div class="section-head reveal">
+    <div class="kicker i18n ca">Qui hi ha vingut</div>
+    <div class="kicker i18n es">Quién ha venido</div>
+    <h2>
+      <span class="i18n ca">Ho expliquen millor ells</span>
+      <span class="i18n es">Lo cuentan mejor ellos</span>
+    </h2>
+  </div>
+  <div class="testimonials">
+    <blockquote class="reveal reveal-1">
+      <p>"Dani fue realmente amable. Me recomendó mi nuevo look y fue muy simpático desde el principio."</p>
+      <cite><b>Alex</b> <span class="i18n ca">· ressenya a Google</span><span class="i18n es">· reseña en Google</span></cite>
+    </blockquote>
+    <blockquote class="reveal reveal-2">
+      <p>"Súper profesionales y muy atentos con los clientes."</p>
+      <cite><b>Maria J.</b> <span class="i18n ca">· ressenya a Google</span><span class="i18n es">· reseña en Google</span></cite>
+    </blockquote>
+    <blockquote class="reveal reveal-3">
+      <p>"Como siempre, genial."</p>
+      <cite><b>Julia Navarro Bonillo</b> <span class="i18n ca">· ressenya a Google</span><span class="i18n es">· reseña en Google</span></cite>
+    </blockquote>
+  </div>
+</section>
+
+<section id="contacte">
+  <div class="section-head reveal">
+    <div class="kicker i18n ca">Visita'ns</div>
+    <div class="kicker i18n es">Visítanos</div>
+    <h2>
+      <span class="i18n ca">Al centre de Reus</span>
+      <span class="i18n es">En el centro de Reus</span>
+    </h2>
+  </div>
+  <div class="contact-block">
+    <div class="contact-info reveal reveal-1">
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <div>
+          <div class="t">Carrer de Santa Teresa, 34</div>
+          <div class="s">43201 Reus, Tarragona</div>
+          <a class="btn btn-ghost" style="margin-top:12px; padding:8px 16px; font-size:0.82rem;" href="https://www.google.com/maps/dir/?api=1&destination=Carrer+de+Santa+Teresa+34,+43201+Reus" target="_blank" rel="noopener">
+            <span class="i18n ca">Com arribar-hi →</span>
+            <span class="i18n es">Cómo llegar →</span>
+          </a>
+        </div>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.4 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+        <div>
+          <a href="tel:+34977321419" class="t" style="color:var(--cream)">977 32 14 19</a>
+          <div class="s i18n ca">Trucada o WhatsApp</div>
+          <div class="s i18n es">Llamada o WhatsApp</div>
+        </div>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5v-11z"/><path d="m4 6.5 8 6.5 8-6.5"/></svg>
+        <div>
+          <a href="mailto:info@elmeusecret.com" class="t" style="color:var(--cream)">info@elmeusecret.com</a>
+          <div class="s i18n ca">Per email, quan no és urgent</div>
+          <div class="s i18n es">Por email, cuando no es urgente</div>
+        </div>
+      </div>
+      <div class="row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>
+        <div>
+          <div class="t i18n ca">Dimarts – Divendres</div>
+          <div class="t i18n es">Martes – Viernes</div>
+          <div class="s">9:00 – 19:00</div>
+          <div class="t" style="margin-top:8px;">Dissabte</div>
+          <div class="s">9:00 – 13:00</div>
+          <div class="s i18n ca" style="margin-top:8px;">Tancat dilluns i diumenge</div>
+          <div class="s i18n es" style="margin-top:8px;">Cerrado lunes y domingo</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-frame reveal reveal-2">
+      <iframe src="https://www.google.com/maps?q=Carrer+de+Santa+Teresa+34,+43201+Reus&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa El Meu Secret"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h3>El Meu Secret</h3>
+      <p>Carrer de Santa Teresa, 34<br>43201 Reus, Tarragona</p>
+      <p style="margin-top:10px;"><a href="tel:+34977321419">977 32 14 19</a></p>
+      <p style="margin-top:6px;"><a href="mailto:info@elmeusecret.com">info@elmeusecret.com</a></p>
+    </div>
+    <div>
+      <h3 class="i18n ca">Horari</h3>
+      <h3 class="i18n es">Horario</h3>
+      <div class="hours-row"><span class="i18n ca">Dt–Dv</span><span class="i18n es">Ma–Vi</span><span>9:00–19:00</span></div>
+      <div class="hours-row"><span>Dissabte</span><span class="i18n es">Sábado</span><span>9:00–13:00</span></div>
+      <div class="hours-row"><span class="i18n ca">Dl / Dg</span><span class="i18n es">Lu / Do</span><span class="i18n ca">Tancat</span><span class="i18n es">Cerrado</span></div>
+    </div>
+    <div>
+      <h3 class="i18n ca">Segueix-nos</h3>
+      <h3 class="i18n es">Síguenos</h3>
+      <p><a href="https://www.instagram.com/elmeusecret/" target="_blank" rel="noopener">Instagram</a></p>
+      <p style="margin-top:6px;"><a href="https://www.facebook.com/elmeusecret/?locale=ca_ES" target="_blank" rel="noopener">Facebook</a></p>
+      <p style="margin-top:6px;"><a href="https://booksy.com/es-es/114261_el-meu-secret_peluqueria_52289_reus" target="_blank" rel="noopener">Booksy</a></p>
+    </div>
+  </div>
+  <div class="foot-note">
+    <span class="i18n ca">Disseny de mostra per a presentació al client — fotografies de banc d'imatges, a substituir per material real del local.</span>
+    <span class="i18n es">Diseño de muestra para presentación al cliente — fotografías de banco de imágenes, a sustituir por material real del local.</span>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang){
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.getElementById('btn-ca').classList.toggle('active', lang === 'ca');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+    document.querySelectorAll('[data-i18n-ca]').forEach(el => {
+      el.textContent = lang === 'ca' ? el.getAttribute('data-i18n-ca') : el.getAttribute('data-i18n-es');
+    });
+    document.querySelectorAll('[data-i18n-ca-ph]').forEach(el => {
+      el.setAttribute('placeholder', lang === 'ca' ? el.getAttribute('data-i18n-ca-ph') : el.getAttribute('data-i18n-es-ph'));
+    });
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- booking form: dates, time slots, phone mask, validation ---------- */
+  (function(){
+    const form = document.getElementById('booking-form');
+    if (!form) return;
+
+    const dateInput = document.getElementById('f-date');
+    const timeSelect = document.getElementById('f-time');
+    const phoneInput = document.getElementById('f-phone');
+    const result = document.getElementById('booking-result');
+    const summary = document.getElementById('booking-summary');
+    const resetBtn = document.getElementById('booking-reset');
+
+    const errors = {
+      ca: {
+        service: 'Selecciona un servei.',
+        date: { closed: 'Tanquem aquest dia — tria dimarts a dissabte.', past: 'Tria una data a partir de demà.', empty: 'Selecciona una data.' },
+        time: 'Selecciona una hora.',
+        name: 'Escriu el teu nom i cognoms (mínim 3 lletres).',
+        phone: 'Introdueix un telèfon vàlid (9 xifres).',
+        email: 'Aquest email no sembla vàlid.'
+      },
+      es: {
+        service: 'Selecciona un servicio.',
+        date: { closed: 'Cerramos ese día — elige de martes a sábado.', past: 'Elige una fecha a partir de mañana.', empty: 'Selecciona una fecha.' },
+        time: 'Selecciona una hora.',
+        name: 'Escribe tu nombre y apellidos (mínimo 3 letras).',
+        phone: 'Introduce un teléfono válido (9 dígitos).',
+        email: 'Este email no parece válido.'
+      }
+    };
+    function L(){ return document.body.getAttribute('data-lang') === 'es' ? 'es' : 'ca'; }
+
+    // date bounds: tomorrow .. +60 days (local date, not UTC, to avoid timezone off-by-one)
+    function fmtISO(d){
+      return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    }
+    const today = new Date();
+    const minD = new Date(today); minD.setDate(minD.getDate() + 1);
+    const maxD = new Date(today); maxD.setDate(maxD.getDate() + 60);
+    dateInput.min = fmtISO(minD);
+    dateInput.max = fmtISO(maxD);
+
+    function slotsForDate(dateStr){
+      const d = new Date(dateStr + 'T00:00:00');
+      const day = d.getDay(); // 0 Sun .. 6 Sat
+      if (day === 0 || day === 1) return null; // closed
+      const slots = [];
+      const end = (day === 6) ? '12:30' : '18:30';
+      let [h, m] = [9, 0];
+      const [eh, em] = end.split(':').map(Number);
+      while (h < eh || (h === eh && m <= em)) {
+        slots.push(String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0'));
+        m += 30; if (m >= 60){ m = 0; h += 1; }
+      }
+      return slots;
+    }
+
+    function populateTime(dateStr){
+      const slots = slotsForDate(dateStr);
+      timeSelect.innerHTML = '';
+      if (!slots){
+        timeSelect.disabled = true;
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = L() === 'ca' ? 'Tancat aquest dia' : 'Cerrado ese día';
+        timeSelect.appendChild(opt);
+        return false;
+      }
+      timeSelect.disabled = false;
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = L() === 'ca' ? 'Tria una hora' : 'Elige una hora';
+      timeSelect.appendChild(placeholder);
+      slots.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s; opt.textContent = s;
+        timeSelect.appendChild(opt);
+      });
+      return true;
+    }
+
+    dateInput.addEventListener('change', () => {
+      clearError('date'); clearError('time');
+      if (!dateInput.value) return;
+      const ok = populateTime(dateInput.value);
+      if (!ok) setError('date', errors[L()].date.closed);
+    });
+
+    // phone mask: 3-2-2-2 groups, digits only, max 9 digits
+    phoneInput.addEventListener('input', () => {
+      let digits = phoneInput.value.replace(/\D/g, '').slice(0, 9);
+      const parts = [digits.slice(0,3), digits.slice(3,5), digits.slice(5,7), digits.slice(7,9)].filter(Boolean);
+      phoneInput.value = parts.join(' ');
+    });
+
+    function setError(field, msg){
+      const wrap = document.getElementById('field-' + field);
+      const err = form.querySelector('[data-err="' + field + '"]');
+      if (wrap) wrap.classList.add('has-error');
+      if (err) err.textContent = msg;
+    }
+    function clearError(field){
+      const wrap = document.getElementById('field-' + field);
+      const err = form.querySelector('[data-err="' + field + '"]');
+      if (wrap) wrap.classList.remove('has-error');
+      if (err) err.textContent = '';
+    }
+    function clearAllErrors(){
+      ['service','date','time','name','phone','email'].forEach(clearError);
+    }
+
+    function validate(){
+      const lang = L();
+      const e = errors[lang];
+      let firstInvalid = null;
+      clearAllErrors();
+
+      const service = document.getElementById('f-service').value;
+      if (!service){ setError('service', e.service); firstInvalid = firstInvalid || 'f-service'; }
+
+      const dateVal = dateInput.value;
+      if (!dateVal){ setError('date', e.date.empty); firstInvalid = firstInvalid || 'f-date'; }
+      else {
+        const d = new Date(dateVal + 'T00:00:00');
+        if (d.getDay() === 0 || d.getDay() === 1){ setError('date', e.date.closed); firstInvalid = firstInvalid || 'f-date'; }
+        else if (fmtISO(d) < dateInput.min){ setError('date', e.date.past); firstInvalid = firstInvalid || 'f-date'; }
+      }
+
+      const timeVal = timeSelect.value;
+      if (!timeVal || timeSelect.disabled){ setError('time', e.time); firstInvalid = firstInvalid || 'f-time'; }
+
+      const name = document.getElementById('f-name').value.trim();
+      if (name.length < 3 || !/^[a-zA-ZÀ-ÿ' -]+$/.test(name)){ setError('name', e.name); firstInvalid = firstInvalid || 'f-name'; }
+
+      const phoneDigits = phoneInput.value.replace(/\D/g, '');
+      if (phoneDigits.length !== 9){ setError('phone', e.phone); firstInvalid = firstInvalid || 'f-phone'; }
+
+      const email = document.getElementById('f-email').value.trim();
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ setError('email', e.email); firstInvalid = firstInvalid || 'f-email'; }
+
+      return firstInvalid;
+    }
+
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const firstInvalid = validate();
+      if (firstInvalid){
+        document.getElementById(firstInvalid).focus();
+        return;
+      }
+
+      const lang = L();
+      const service = document.getElementById('f-service').value;
+      const staff = document.getElementById('f-staff').value || (lang === 'ca' ? 'Sense preferència' : 'Sin preferencia');
+      const dateVal = dateInput.value;
+      const d = new Date(dateVal + 'T00:00:00');
+      const dateFmt = d.toLocaleDateString(lang === 'ca' ? 'ca-ES' : 'es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      const time = timeSelect.value;
+      const name = document.getElementById('f-name').value.trim();
+      const phone = phoneInput.value;
+      const email = document.getElementById('f-email').value.trim();
+
+      const rows = [
+        [lang === 'ca' ? 'Servei' : 'Servicio', service],
+        [lang === 'ca' ? 'Professional' : 'Profesional', staff],
+        [lang === 'ca' ? 'Data' : 'Fecha', dateFmt],
+        [lang === 'ca' ? 'Hora' : 'Hora', time],
+        [lang === 'ca' ? 'Nom' : 'Nombre', name],
+        [lang === 'ca' ? 'Telèfon' : 'Teléfono', phone]
+      ];
+      if (email) rows.push(['Email', email]);
+
+      summary.innerHTML = rows.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+      form.hidden = true;
+      result.hidden = false;
+      result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      result.focus();
+    });
+
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      clearAllErrors();
+      timeSelect.innerHTML = '<option value="">' + (L() === 'ca' ? 'Tria primer una data' : 'Elige primero una fecha') + '</option>';
+      timeSelect.disabled = true;
+      result.hidden = true;
+      form.hidden = false;
+      form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+</script>
+
+</body>
+</html>
